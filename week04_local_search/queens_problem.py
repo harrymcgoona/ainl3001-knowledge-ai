@@ -62,3 +62,25 @@ class QueensProblem(Problem):
         new_state[column] = new_row
 
         return new_state
+
+## MANUAL EXPLORATION
+
+'''
+for the state [0, 2, 1, 3]
+
+Q . . .
+. . Q .
+. Q . .
+. . . Q
+
+1. Number of queens conflicts?
+#1 (0, 0) and (3, 3)
+#2 (1, 2) and (2, 1)
+
+2. Is this a valid solution?
+No. All queens must be safe from conflict.
+
+3. Moves to lower conflict?
+Moving (1, 2) to (1, 3) brings the conflicts down from 2 to 1 as it is no longer attacking (2, 1).
+By the nature of the 4x4 grid there is no further moves that will reduce conflict as at least 1 queen will be next to or across from another.
+'''
