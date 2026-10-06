@@ -6,7 +6,6 @@ AINL3001 — Knowledge-Driven AI
 import random
 from queens_problem import QueensProblem, count_conflicts
 
-
 def generate_neighbours(problem, state):
     """
     Task 2: Generate all valid neighbouring states.
