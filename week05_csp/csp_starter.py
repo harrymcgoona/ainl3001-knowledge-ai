@@ -70,13 +70,18 @@ constraints = [
 
 def is_valid_assignment(assignment):
     """Return True if a complete OR partial assignment is valid."""
+    # TODO:
+    # 1. Loop over neighbouring pairs in constraints.
+    # 2. If BOTH regions have been assigned, compare their colours.
+    # 3. Return False if neighbouring regions have the same colour.
+    # 4. Otherwise return True.
     for var1, var2 in constraints:
-        # Check if BOTH regions in a constraint pair have been assigned
-        if var1 in assignment and var2 in assignment:
-            # If neighbouring regions have the same colour, it's invalid
-            if assignment[var1] == assignment[var2]:
-                return False
-    return True
+            # Check if BOTH regions in a constraint pair have been assigned
+            if var1 in assignment and var2 in assignment:
+                # If neighbouring regions have the same colour, it's invalid
+                if assignment[var1] == assignment[var2]:
+                    return False
+        return True
 
 
 # --------------------------------------------------
@@ -100,7 +105,34 @@ def select_unassigned_variable(assignment):
     # For each unassigned variable, temporarily try each colour,
     # check is_valid_assignment(), and undo the temporary assignment.
     # Count legal colours and choose the variable with the fewest.
-    pass
+    unassigned = [v for v in variables if v not in assignment]
+    if not unassigned:
+        return None
+
+    if not use_mrv:
+        # Task 3: Simple variable selection (first unassigned)
+        return unassigned[0]
+
+    # Task 5: Minimum Remaining Values (MRV) heuristic
+    best_variable = None
+    min_legal_count = float('inf')
+
+    for var in unassigned:
+        legal_count = 0
+        for colour in domains[var]:
+            # Temporarily assign colour and check validity
+            assignment[var] = colour
+            if is_valid_assignment(assignment):
+                legal_count += 1
+            # Undo temporary assignment
+            del assignment[var]
+
+        if legal_count < min_legal_count:
+            min_legal_count = legal_count
+            best_variable = var
+
+    return best_variable
+
 
 
 # --------------------------------------------------
