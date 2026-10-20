@@ -56,7 +56,10 @@ WINNING_LINES = [
 def print_board(state):
     """Display the nine cells as a 3-by-3 board."""
     # TODO: Print three rows of three cells.
-    pass
+    for i in range(0, 9, 3):
+        print(f" {state[i]} | {state[i+1]} | {state[i+2]} ")
+        if i < 6:
+            print("---+---+---")
 
 
 # --------------------------------------------------
@@ -66,7 +69,7 @@ def print_board(state):
 def available_moves(state):
     """Return indices of empty cells (0 through 8)."""
     # TODO: Find every position containing " ".
-    pass
+    return [i for i, cell in enumerate(state) if cell == " "]
 
 
 # --------------------------------------------------
@@ -79,7 +82,9 @@ def make_move(state, move, player):
     Assume move is legal. Do not modify the input board.
     """
     # TODO: Copy the board and place the player's mark.
-    pass
+    new_board = list(state)
+    new_board[move] = player
+    return new_board
 
 
 # --------------------------------------------------
