@@ -149,7 +149,7 @@ def backtracking_search(assignment):
     # 5. Return the recursive result if a solution was found.
     # 6. Otherwise remove the temporary assignment (backtrack).
     # 7. Return None if every colour fails.
-    
+
     # 1. Base case: If all variables are assigned, return a copy of solution
     if len(assignment) == len(variables):
         return assignment.copy()
@@ -182,6 +182,12 @@ def backtracking_search(assignment):
 # Six regions with three possible colours each give 3 ** 6 = 729
 # complete assignments. Why can backtracking avoid checking all 729?
 
+# Backtracking builds solutions incrementally and checks constraints on partial assignments at every step. 
+# If a partial assignment violates a constraint (for example, if WA and NT are both assigned "Red" at step 2), 
+# backtracking immediately halts that branch and discards it. 
+# This single check prunes all 3 ** 6 = 729 possible complete assignments that would have stemmed from that invalid prefix, 
+# saving the algorithm from ever having to generate or test them. 
+# Brute force on the other hand, blindly generates and evaluates all 729 complete combinations regardless of early conflicts.
 
 # --------------------------------------------------
 # TESTING AREA
