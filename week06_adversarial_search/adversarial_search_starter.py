@@ -30,7 +30,9 @@ print(r"""
        3    5  2    9
 """)
 print("Which values do the two MIN nodes return?")
+print("LEFTMIN = 3, RIGHTMIN = 2.")
 print("Which branch should MAX choose, and why?")
+print("Because it's looking for the max of the mins it should choose left (3 > 2).")
 
 # BOARD — X plays next (three X marks and two O marks).
 # Board positions are numbered 0 to 8, left to right, top to bottom.
