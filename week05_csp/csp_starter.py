@@ -70,11 +70,6 @@ constraints = [
 
 def is_valid_assignment(assignment):
     """Return True if a complete OR partial assignment is valid."""
-    # TODO:
-    # 1. Loop over neighbouring pairs in constraints.
-    # 2. If BOTH regions have been assigned, compare their colours.
-    # 3. Return False if neighbouring regions have the same colour.
-    # 4. Otherwise return True.
     for var1, var2 in constraints:
             # Check if BOTH regions in a constraint pair have been assigned
             if var1 in assignment and var2 in assignment:
@@ -88,7 +83,7 @@ def is_valid_assignment(assignment):
 # TASK 3 AND TASK 5 — VARIABLE SELECTION
 # --------------------------------------------------
 
-def select_unassigned_variable(assignment):
+def select_unassigned_variable(assignment, use_mrv=True):
     """Choose the next unassigned region.
 
     Task 3: First return the FIRST unassigned region.
@@ -97,14 +92,6 @@ def select_unassigned_variable(assignment):
     choose the unassigned region with the FEWEST currently legal
     colours. Break ties by keeping the first region in variables.
     """
-    # TASK 3 TODO:
-    # Return the first variable not in assignment, or None if all
-    # variables have been assigned.
-    #
-    # TASK 5 TODO (after backtracking works):
-    # For each unassigned variable, temporarily try each colour,
-    # check is_valid_assignment(), and undo the temporary assignment.
-    # Count legal colours and choose the variable with the fewest.
     unassigned = [v for v in variables if v not in assignment]
     if not unassigned:
         return None
@@ -139,17 +126,8 @@ def select_unassigned_variable(assignment):
 # TASK 3 — BACKTRACKING SEARCH
 # --------------------------------------------------
 
-def backtracking_search(assignment):
+def backtracking_search(assignment, use_mrv=True):
     """Return a complete valid assignment, or None if none exists."""
-    # TODO:
-    # 1. If every variable has been assigned, return a COPY.
-    # 2. Choose a variable with select_unassigned_variable().
-    # 3. For each colour in its domain, temporarily assign it.
-    # 4. If the partial assignment is valid, search recursively.
-    # 5. Return the recursive result if a solution was found.
-    # 6. Otherwise remove the temporary assignment (backtrack).
-    # 7. Return None if every colour fails.
-
     # 1. Base case: If all variables are assigned, return a copy of solution
     if len(assignment) == len(variables):
         return assignment.copy()
