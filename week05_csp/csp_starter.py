@@ -163,7 +163,7 @@ def backtracking_search(assignment, use_mrv=True):
 # Backtracking builds solutions incrementally and checks constraints on partial assignments at every step. 
 # If a partial assignment violates a constraint (for example, if WA and NT are both assigned "Red" at step 2), 
 # backtracking immediately halts that branch and discards it. 
-# This single check prunes all 3 ** 6 = 729 possible complete assignments that would have stemmed from that invalid prefix, 
+# This single check prunes all 3 ** 4 = 81 possible complete assignments that would have stemmed from that invalid prefix, 
 # saving the algorithm from ever having to generate or test them. 
 # Brute force on the other hand, blindly generates and evaluates all 729 complete combinations regardless of early conflicts.
 
@@ -202,6 +202,10 @@ if __name__ == "__main__":
     print("\nPossible complete assignments:", 3 ** len(variables))
     print("\nReflection:")
     print("1. What causes backtracking?")
+    print("When an unassigned variable has no legal values remaining in its domain because every possible choice violates a constraint with its already assigned neighbours, causing the algorithm to undo the most recent assignment and try an alternative path")
     print("2. Why can backtracking be faster than brute force?")
+    print("If assigning WA = Red and NT = Red fails early at step 2, backtracking immediately discards that entire branch, avoiding the 3 ** 4 = 81 complete solutions that would have stemmed from it. Brute force blindly generates and evaluates all 729 complete combinations regardless of early conflicts.")
     print("3. Why might MRV reduce search?")
+    print("By prioritizing the variable with the fewest legal options left, MRV exposes dead-ends near the top of the search tree rather than deep down, drastically reducing the branching factor and saving search steps.")
     print("4. How could this model represent timetabling?")
+    print("Timetabling can be modeled with lectures as variables, time-slot/room combinations as domains, and rules like no overlapping lecturers or rooms as constraints.")
