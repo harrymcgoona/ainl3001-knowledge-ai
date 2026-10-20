@@ -34,9 +34,13 @@ print("Manual CSP Exploration")
 print(example_assignment)
 print("\nQuestions:")
 print("1. Is this assignment valid?")
+print("This assignment is invalid.")
 print("2. Which neighbouring pairs violate a constraint?")
+print("WA-NT and NSW-V (along with SA-V) violate constraints because adjacent regions share the same colour.")
 print("3. How could you correct the assignment?")
+print("By changing conflicting region colours so no adjacent pairs share a colour.")
 print("4. Why is it useful to detect violations early?")
+print("It saves work by pruning invalid partial assignments before exploring entire search branches.")
 
 # --------------------------------------------------
 # TASK 1 — CSP REPRESENTATION
