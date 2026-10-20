@@ -204,7 +204,29 @@ def alpha_beta(state, maximizing, alpha, beta, counter):
     # - MAX updates alpha; MIN updates beta.
     # - Stop exploring remaining moves if alpha >= beta.
     # - Count visited nodes exactly as in minimax().
-    pass
+    counter["nodes"] += 1
+    if is_terminal(state):
+        return utility(state)
+    
+    if maximizing:
+        max_eval = -float('inf')
+        for move in available_moves(state):
+            eval_score = alpha_beta(make_move(state, move, "X"), False, alpha, beta, counter)
+            max_eval = max(max_eval, eval_score)
+            alpha = max(alpha, eval_score)
+            if beta <= alpha:
+                break
+        return max_eval
+    else:
+        min_eval = float('inf')
+        for move in available_moves(state):
+            eval_score = alpha_beta(make_move(state, move, "O"), True, alpha, beta, counter)
+            min_eval = min(min_eval, eval_score)
+            beta = min(beta, eval_score)
+            if beta <= alpha:
+                break
+        return min_eval
+    
 
 
 # --------------------------------------------------
@@ -216,7 +238,22 @@ def best_move_alpha_beta(state, counter):
     # TODO: Like best_move(), but call alpha_beta().
     # Start alpha at -infinity and beta at +infinity.
     # Update alpha after each candidate X move.
-    pass
+    if is_terminal(state):
+        return None
+    
+    best_score = -float('inf')
+    best_move_idx = None
+    alpha = -float('inf')
+    beta = float('inf')
+    
+    for move in available_moves(state):
+        score = alpha_beta(make_move(state, move, "X"), False, alpha, beta, counter)
+        if score > best_score:
+            best_score = score
+            best_move_idx = move
+        alpha = max(alpha, score)
+            
+    return best_move_idx
 
 
 # --------------------------------------------------
