@@ -81,7 +81,7 @@ def is_valid_assignment(assignment):
                 # If neighbouring regions have the same colour, it's invalid
                 if assignment[var1] == assignment[var2]:
                     return False
-        return True
+    return True
 
 
 # --------------------------------------------------
