@@ -175,7 +175,19 @@ def best_move(state, counter):
     # TODO: Try each legal X move, call minimax() for O's turn,
     # and return the move with the highest score.
     # If the board is terminal, return None.
-    pass
+    if is_terminal(state):
+        return None
+    
+    best_score = -float('inf')
+    best_move_idx = None
+    
+    for move in available_moves(state):
+        score = minimax(make_move(state, move, "X"), False, counter)
+        if score > best_score:
+            best_score = score
+            best_move_idx = move
+            
+    return best_move_idx
 
 
 # --------------------------------------------------
