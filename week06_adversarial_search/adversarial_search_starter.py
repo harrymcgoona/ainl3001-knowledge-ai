@@ -286,6 +286,10 @@ if __name__ == "__main__":
 
     print("\nReflection:")
     print("1. Why is Tic-Tac-Toe a search problem?")
+    print("Because players must look ahead across multiple turns and evaluate branching action sequences against an opponent.")
     print("2. Why does Minimax assume an optimal opponent?")
+    print("To ensure the AI selects a foolproof move that maximizes its outcome even against the best possible counter play.")
     print("3. What is the purpose of a utility function?")
+    print("To quantify terminal states (+1, -1, 0) so the search algorithm has an objective metric to evaluate game outcomes.")
     print("4. What happens as games become larger?")
+    print("The state space and game tree grow exponentially (combinatorial explosion), making exhaustive search computationally inefficient.")
