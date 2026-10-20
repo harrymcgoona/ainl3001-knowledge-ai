@@ -145,7 +145,22 @@ def minimax(state, maximizing, counter):
     # 3. For X (MAX), recursively choose the highest score.
     # 4. For O (MIN), recursively choose the lowest score.
     # Use make_move() to avoid changing the original board.
-    pass
+    counter["nodes"] += 1
+    if is_terminal(state):
+        return utility(state)
+    
+    if maximizing:
+        max_eval = -float('inf')
+        for move in available_moves(state):
+            eval_score = minimax(make_move(state, move, "X"), False, counter)
+            max_eval = max(max_eval, eval_score)
+        return max_eval
+    else:
+        min_eval = float('inf')
+        for move in available_moves(state):
+            eval_score = minimax(make_move(state, move, "O"), True, counter)
+            min_eval = min(min_eval, eval_score)
+        return min_eval
 
 
 # --------------------------------------------------
