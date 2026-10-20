@@ -149,7 +149,30 @@ def backtracking_search(assignment):
     # 5. Return the recursive result if a solution was found.
     # 6. Otherwise remove the temporary assignment (backtrack).
     # 7. Return None if every colour fails.
-    pass
+    
+    # 1. Base case: If all variables are assigned, return a copy of solution
+    if len(assignment) == len(variables):
+        return assignment.copy()
+
+    # 2. Select an unassigned variable
+    var = select_unassigned_variable(assignment, use_mrv=use_mrv)
+
+    # 3. Try each colour in the variable's domain
+    for colour in domains[var]:
+        assignment[var] = colour
+
+        # 4. If partial assignment is valid, search recursively
+        if is_valid_assignment(assignment):
+            result = backtracking_search(assignment, use_mrv=use_mrv)
+            # 5. If solution found, return it
+            if result is not None:
+                return result
+
+        # 6. Backtrack: remove temporary assignment
+        del assignment[var]
+
+    # 7. Fail if no colour works
+    return None
 
 
 # --------------------------------------------------
